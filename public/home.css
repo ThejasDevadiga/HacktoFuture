@@ -1,0 +1,16 @@
+.container{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ background-color: rgba(255, 209, 209, 0.934);
+ margin-left: '45';
+ margin-right: '45';
+}
+#hr{
+    border-top: 3px dotted rgb(0, 0, 0);
+    height: 3px;
+    width: 50%;
+   }
+container.border{
+    border-style: dashed;
+}
