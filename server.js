@@ -43,7 +43,7 @@ app.use(cors());
 console.log(__dirname);
 app.use(express.static("public"));
 
-app.post(
+app.get(
   "/products",
   asyncHandler(async (req, res) => {
     const result = await Products.find({}, {});
@@ -176,13 +176,7 @@ app.get(
       });
   })
 );
-app.post("/post", async (req, res) => {
-  const data = req.body.url;
-  res.send({
-    data: data,
-    status: "Approved",
-  });
-});
+
 
 app.get("/", (req, res) => {
   console.log(__dirname);

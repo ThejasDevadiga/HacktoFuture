@@ -23,6 +23,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/billing.css" />
     <script src="requestor.js"></script>
+    <script src="billing.js"></script>
     <title>BILLING</title>
   </head>
   <body>
@@ -60,13 +61,13 @@
         <h2 id="heading">BILLING DETAILS</h2>
         <div class="form-group">
             <div class="row">
-            <label for="lang">Name :</label>
-            <select name="languages" id="lang">
+            <label for="prod">Name :</label>
+            <select name="products" id="prod">
               <option value="select">Select a Name</option>
-              <option value="javascript">Pencil</option>
-              <option value="php">Pen</option>
-              <option value="java">Shampoo</option>
-              <option value="golang">Detergent</option>
+              <option value="64477352c700bb82014dc540">Book</option>
+              <option value="64477352c700bb82014dc541">Pen</option>
+              <option value="64477352c700bb82014dc542">Eraser</option>
+              <option value="64477352c700bb82014dc543">Pencil</option>
             </select>
           </div>
           <div class="row">
@@ -76,7 +77,7 @@
               id="quantity"
               name="quantity"
               min="1"
-              max="5"
+              max="4"
               />
             </div>
           </div>
@@ -84,6 +85,7 @@
             <input type="submit" value="Submit" />
       
       </form>
+      
       <div class="table">
         <table id="prod-list">
         <thead>
