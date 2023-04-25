@@ -21,6 +21,6 @@ const products = mongoose.Schema({
     strictPopulate:false
 });
 
-const Products = mongoose.model('products', products)
 
+const Products = mongoose.model('products', products)
 module.exports = Products;
