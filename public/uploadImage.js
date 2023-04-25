@@ -35,11 +35,10 @@ function displayImage() {
           console.log(data);
           // result.innerText = "<p>The selected file uploaded to Cloudinary!</p>";
           // result.style.color = "green";
-          console.log("https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url="+data.url.toString());
-          
+          // https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url=http://res.cloudinary.com/acahscollege/image/upload/v1682439427/mwlyrwhkl6aiyvawcr2h.jpg
           var result = await requestor(
-            "GET",
-            "https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url="+data.url.toString()
+            "POST",data.url.toString(),
+            "http://localhost:5000/validateInvoice"
           );
           data = JSON.parse(result);
           console.log(data);

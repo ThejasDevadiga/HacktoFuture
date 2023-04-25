@@ -5,6 +5,7 @@ const Products = require("./src/models/products");
 const Invoices  = require('./src/models/invoiceList')
 // const CreateInvoice = require('./src/controller/createInvoice')
 const asyncHandler = require("express-async-handler");
+const Tesseract = require('tesseract.js')
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
@@ -30,6 +31,8 @@ const errorHandler = (err, req, res, next) => {
 
 connectDB();
 // CreateInvoice()
+console.log(tesserExtracter());
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -67,11 +70,24 @@ app.get(
 );
 
 app.post("/validateInvoice",(req,res)=>{
-  console.log(req.body.text);
-  res.send(200).json({
+ 
+  const url = req.body.text;
+  console.log(url);
+ const result =  Tesseract.recognize(
+    url,
+    'eng',
+    { logger: m => console.log(m) } 
+    ).then(({ data: { text } }) => {
+        console.log(text);
+        return text;
+    })
+    console.log(result);
+    res.send({
+    data:result,
     status:"Approved"
     })
 })
+
 app.get("/", (req, res) => {
   console.log(__dirname);
   res.sendFile(__dirname + "/views/home.html");
@@ -84,7 +100,6 @@ app.get("/billing", (req, res) => {
 app.get("/about", (req, res) => {
   res.sendFile(__dirname + "/views/aboutus.html");
 });
-
 
 app.use(errorHandler);
 

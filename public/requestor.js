@@ -8,13 +8,18 @@ async function requestor(type, raw, url){
       //  mode: "no-cors",
        method: type,
        headers: myHeaders,
-       body:raw,
        redirect: 'follow'
      };
-     console.log(requestOptions);
+     if(raw){
+      requestOptions.body = raw
+    }
+    
+     console.lofg(requestOptions);
      
     return  await fetch(url, requestOptions)
+    .then(res=>console.log(res))
      .then(response => response.text())
+     
        .then(result => {return result} )
        .catch(error =>{ console.log('error', error); return null});  
    }

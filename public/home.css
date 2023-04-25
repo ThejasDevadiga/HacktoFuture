@@ -19,12 +19,15 @@ body {
 }
 input[type="submit"] {
   border-width: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 20px;
+  border-color:#4158d0 ;
   background-color: #12192c;
-  border-color: #4158d0;
-  color: #fff;
-  border-radius: 10px;
-  height: 5rem;
-  width: 10rem;
+  color: white;
+  
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .formcontainer {
@@ -54,7 +57,9 @@ font-weight: 600;
   box-shadow: 1px 1px 5px rgb(74, 74, 74);
 }
 
-
+a{
+ border:20px #4158d0;
+}
 
 input[type="file"] {
   height: 5rem;
