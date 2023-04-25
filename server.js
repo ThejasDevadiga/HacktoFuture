@@ -43,6 +43,7 @@ app.set("view engine", "pug");
 console.log(__dirname);
 app.use(express.static("public"));
 
+
 app.get(
   "/products",
   asyncHandler(async (req, res) => {
@@ -57,8 +58,9 @@ app.get(
   asyncHandler(async (req, res) => {
     const result = await Invoices.find({}, {}).populate({
     model:Products,
-    path:"productsproductID"
+    path:"productList.productID"
   });
+  
     res.status(200).json({
       data: result,
     });

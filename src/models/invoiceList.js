@@ -23,7 +23,7 @@ const invoices = mongoose.Schema(
       type: Date,
       require: true,
     },
-    products: [
+    productList: [
       {
         productID: {
           type: mongoose.Schema.Types.ObjectId,
