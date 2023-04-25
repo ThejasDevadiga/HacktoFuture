@@ -72,8 +72,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/home.html");
 });
 
-app.get("/billing.html", (req, res) => {
+app.get("/billing", (req, res) => {
   res.sendFile(__dirname + "/views/billing.html");
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(__dirname + "/views/aboutus.html");
 });
 
 

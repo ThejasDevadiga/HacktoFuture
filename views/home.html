@@ -25,8 +25,8 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
               
-              <li><a href="./billing.html">Billing</a></li>
-              <li><a href="#">About us</a></li>
+              <li><a href="/billing">Billing</a></li>
+              <li><a href="/about">About us</a></li>
             </ul>
             
           </div>
@@ -38,21 +38,50 @@
             <img src="https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-18130.jpg?w=1380&t=st=1682416995~exp=1682417595~hmac=81342bceb9271b338d2367311119859b253ef129ceee4e233aa78f5dbecce8f9" alt="">
     </div>
     <div class="formcontainer">
+      <div class="imagecontainer">
+        <img id="preview" src="#" alt="Please select image" width="300" height="300">
+      </div>
       <div class="form">
-        <form action="">
+        <form >
           <div class="form-group">
-            <label form="name"><h2>Upload Your INVOICE </h2></label>
-            <input type="file" class="form-control" id="name" placeholder="Select ">
-            </div>
-           <input type="submit" value="submit" onchange="uploadImage()">
+            <label for="invoice"><h2>Upload Your INVOICE</h2></label>
+            <input type="file" id="invoice" accept="image/*" onchange="displayImage()">
+          </div>
+          
+          <input type="submit" value="Submit">
         </form>
       </div>
     </div>
-   <script>
-   function uploadImage(){
-    console.log("uploaded")
-   }
-    </script>
+   
+    <script>
+      function displayImage() {
+      try{
+      
+      const preview = document.querySelector("#preview")
+        const file = document.querySelector("#invoice").files[0]
+        const reader = new FileReader()
+        reader.addEventListener("load", function () {
+         preview.src = reader.result 
+        }, false)
+        if (file.type.startsWith('image/')) {
+          result.innerText = 'The selected file is an image.'
+        } else {
+          result.innerText = 'The selected file is not an image.'
+        }
+        if (file) {
+        
+          reader.readAsDataURL(file)
+          
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+      
+      }
+      </script>
  
 </body>
 </html>
+
+
