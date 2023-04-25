@@ -31,7 +31,6 @@ const errorHandler = (err, req, res, next) => {
 
 connectDB();
 // CreateInvoice()
-console.log(tesserExtracter());
 
 const app = express();
 
@@ -69,24 +68,29 @@ app.get(
   })
 );
 
-app.post("/validateInvoice",(req,res)=>{
+app.post("/validateInvoice",asyncHandler(async(req,res)=>{
  
   const url = req.body.text;
   console.log(url);
- const result =  Tesseract.recognize(
+ Tesseract.recognize(
     url,
     'eng',
-    { logger: m => console.log(m) } 
+    // { logger: m => console.log(m) } 
     ).then(({ data: { text } }) => {
         console.log(text);
-        return text;
+        
+        res.send({
+          data:text,
+          status:"Approved"
+          })
     })
-    console.log(result);
-    res.send({
-    data:result,
-    status:"Approved"
-    })
-})
+    .catch(err=>{
+      res.send({
+        data:err,
+        status:"Disapproved"
+        })
+    })   
+}))
 
 app.get("/", (req, res) => {
   console.log(__dirname);
