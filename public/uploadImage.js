@@ -31,12 +31,18 @@ function displayImage() {
         }
       )
         .then((res) => res.json())
-        .then((data) => {
+        .then(async(data) => {
           console.log(data);
-          result.innerText = "The selected file uploaded to Cloudinary!";
-          result.style.color = "green";
-          console.log(data.url.toString());
+          // result.innerText = "<p>The selected file uploaded to Cloudinary!</p>";
+          // result.style.color = "green";
+          console.log("https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url="+data.url.toString());
           
+          var result = await requestor(
+            "GET",
+            "https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url="+data.url.toString()
+          );
+          data = JSON.parse(result);
+          console.log(data);
         })
         .catch((err) => {
           console.log(err);
