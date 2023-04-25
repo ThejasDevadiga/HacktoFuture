@@ -1,0 +1,21 @@
+//write one java script code for matching two strings and showing the matching percentage along with the defect in the target string when compared to the original string
+
+
+// code to extract string from a reference file 
+// load the reference file
+const fs = require('fs');
+const data = fs.readFileSync('reference.txt', 'utf-8');
+
+// search for the string
+const searchString = 'example string';
+const index = data.indexOf(searchString);
+
+if (index !== -1) {
+  // extract the string
+  const start = index;
+  const end = start + searchString.length;
+  const extractedString = data.substring(start, end);
+  console.log(extractedString);
+} else {
+  console.log(`String '${searchString}' not found in the file.`);
+}

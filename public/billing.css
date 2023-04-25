@@ -1,22 +1,15 @@
-body {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size: 15px;
-   
- }
-
 .background{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50%;
     width: 100%;
-    /* background-image: url('https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-18130.jpg?w=1380&t=st=1682416995~exp=1682417595~hmac=81342bceb9271b338d2367311119859b253ef129ceee4e233aa78f5dbecce8f9'); */
+    /* background-image: url('https://img.freepik.com/free-vector/finance-financial-performance-concept-illustration_53876-43398.jpg?w=1380&t=st=1682421443~exp=1682422043~hmac=bbc13031926eb5accbf180d7343ff592c8ff59083334e7e044d2f6f5d387c715'); */
     -webkit-filter: blur(8px);
     filter: blur(8px);
     background-position: center;
     background-repeat: no-repeat;
-    background-size:cover;
-    background-position-y: center;
+    background-size: cover;
    }
    
    .formcontainer{
@@ -27,7 +20,8 @@ body {
        background-color: rgba(224, 224, 224, 0.934);
        border-radius: 2%;
        background-color: rgba(219, 219, 219, 0.4); 
-       justify-content: center;  
+       justify-content: center;
+       flex-direction: column;
        border: 3px solid #f1f1f1;
        position: absolute;
        top: 50%;
@@ -35,6 +29,7 @@ body {
        transform: translate(-50%, -50%);
        z-index: 2;
        text-align: center;
+      
    }
    .formcontainer:hover{
        box-shadow: 1px 1px 5px rgb(74, 74, 74);  
@@ -81,4 +76,15 @@ input[type="file"]{
 
     
 }
+select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family:  sans-serif;
+    outline: 0;
+    background: rgb(109, 109, 109);
+    color: #fff;
+    border: none;
+    padding: 4px;
+    border-radius: 9px;
+  }
 

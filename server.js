@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Products = require("./src/models/products");
 const Invoices  = require('./src/models/invoiceList')
-const CreateInvoice = require('./src/controller/createInvoice')
+// const CreateInvoice = require('./src/controller/createInvoice')
 const asyncHandler = require("express-async-handler");
 const connectDB = async () => {
   try {
@@ -29,7 +29,7 @@ const errorHandler = (err, req, res, next) => {
 };
 
 connectDB();
-CreateInvoice()
+// CreateInvoice()
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -37,14 +37,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors());
-app.set("views", "views");
-app.set("view engine", "pug");
+
 
 console.log(__dirname);
 app.use(express.static("public"));
 
 
-app.get(
+app.post(
   "/products",
   asyncHandler(async (req, res) => {
     const result = await Products.find({}, {});
@@ -69,8 +68,15 @@ app.get(
 
 
 app.get("/", (req, res) => {
-  res.render("home", {});
+  console.log(__dirname);
+  res.sendFile(__dirname + "/views/home.html");
 });
+
+app.get("/billing.html", (req, res) => {
+  res.sendFile(__dirname + "/views/billing.html");
+});
+
+
 app.use(errorHandler);
 
 const PORT = 5000;
