@@ -37,7 +37,7 @@ function displayImage() {
           // result.style.color = "green";
           // https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url=http://res.cloudinary.com/acahscollege/image/upload/v1682439427/mwlyrwhkl6aiyvawcr2h.jpg
           var result = await requestor(
-            "GET",data.url.toString(),
+            "POST",data.url.toString(),
             "http://localhost:5000/validateInvoice"
           );
           data = JSON.parse(result);
