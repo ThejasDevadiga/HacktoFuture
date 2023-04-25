@@ -21,6 +21,7 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <link rel="stylesheet" href="/billing.css" />
     <script src="requestor.js"></script>
     <script src="billing.js"></script>
@@ -57,7 +58,7 @@
       />
     </div>
     <div class="formcontainer">
-      <form id="bill-form">
+      <form id="bill-form" action="#">
         <h2 id="heading">BILLING DETAILS</h2>
         <div class="form-group">
             <div class="row">
@@ -82,8 +83,7 @@
             </div>
           </div>
           
-            <input type="submit" value="Submit" />
-      
+            <input type="button" value="Submit" id="submit" />
       </form>
       
       <div class="table">
@@ -99,46 +99,33 @@
         <tbody>
         <tr>
           <td>1</td>
-        <td>Shampoo</td>
-        <td>2</td>
-        <td>90</td>
+        <td>Pencil</td>
+        <td>3</td>
+        <td>20</td>
         </tr>
         <tr>
           <td>2</td>
-          <td>Spray</td>
-          <td>20</td>
-          <td>600</td>
+          <td>Sanitizer</td>
+          <td>2</td>
+          <td>100</td>
           </tr>
         <tr>
           <td>3</td>
-            <td>Soap</td>
+            <td>Book</td>
             <td>3</td>
-            <td>60</td>
+            <td>50</td>
             </tr>
-        <tr>
-          <td>4</td>
-              <td>Ketchup</td>
-              <td>4</td>
-              <td>200</td>
-              </tr>
-        <tr>
-          <td>5</td>
-                <td>PopCorn</td>
-                <td>5</td>
-                <td>700</td>
-                </tr>
-         <tr>
-          <td></td>
-          <td></td>
-          <td>Total Amount</td> 
-          <td>Rs 1100</td> 
-                  
-                  </tr>
+        <tr><td>
+        </td>
+        <td>
+        </td>
+        <td>Total</td><td>410</td>
+        </tr>
         </tbody>
         </table>
-
-        <input type="submit" value="Checkout">
+        <input type="button" value="Checkout" id="makepdf">
       </div>
     </div>
   </body>
+  
 </html>
