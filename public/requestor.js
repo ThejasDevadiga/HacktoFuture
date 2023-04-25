@@ -14,12 +14,11 @@ async function requestor(type, raw, url){
       requestOptions.body = raw
     }
     
-     console.lofg(requestOptions);
+     console.log(requestOptions);
      
     return  await fetch(url, requestOptions)
-    .then(res=>console.log(res))
-     .then(response => response.text())
-     
+    // .then(res=>console.log(res.text()))
+    //  .then(response =>  response.text())
        .then(result => {return result} )
        .catch(error =>{ console.log('error', error); return null});  
    }

@@ -32,12 +32,12 @@ function displayImage() {
       )
         .then((res) => res.json())
         .then(async(data) => {
-          console.log(data);
+          console.log(data.url.toString());
           // result.innerText = "<p>The selected file uploaded to Cloudinary!</p>";
           // result.style.color = "green";
           // https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url=http://res.cloudinary.com/acahscollege/image/upload/v1682439427/mwlyrwhkl6aiyvawcr2h.jpg
           var result = await requestor(
-            "POST",data.url.toString(),
+            "GET",data.url.toString(),
             "http://localhost:5000/validateInvoice"
           );
           data = JSON.parse(result);

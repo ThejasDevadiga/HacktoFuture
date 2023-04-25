@@ -68,17 +68,62 @@ app.get(
   })
 );
 
-app.post("/validateInvoice",asyncHandler(async(req,res)=>{
- 
-  const url = req.body.text;
+app.post("/validateInvoice/",asyncHandler(async(req,res)=>{
+
+  const url = req.body.url;
   console.log(url);
  Tesseract.recognize(
     url,
     'eng',
-    // { logger: m => console.log(m) } 
-    ).then(({ data: { text } }) => {
-        console.log(text);
-        
+    { logger: m => console.log(m) } 
+    ).then(async({ data: { text } }) => {  
+      const result = await Invoices.find({}, {}).populate({
+        model:Products,
+        path:"productList.productID"
+      });
+      console.log(text);
+      //let string = "Hello, this is your Invoice number: 123456\nPlease pay your dues on time.";
+
+//       let start_word = "Invoice";
+//         let start_index = text.indexOf(start_word);
+
+
+//         let end_word = "\n";
+//        let end_index = text.indexOf(end_word);
+
+
+//         let substring = text.substring(start_index + start_word.length, end_index);
+
+
+//          let words = substring.split(" ");
+
+//         console.log(words);
+//        words="Invoice"+words;
+//        console.log(result);
+//        // Sample JSON database
+//      //let database = '{"colors": ["red", "green", "blue"], "fruits": ["apple", "banana", "orange"]}';
+
+// // String to compare
+// //let string = "green";
+
+// // Parse the database into a JavaScript object
+// let databaseObject = JSON.parse(result);
+
+// // Loop through the values in the database and check if the string matches any of them
+// let matchFound = false;
+// for (let key in databaseObject) {
+//   if (databaseObject[key].includes(words)) {
+//     matchFound = true;
+//     console.log("Match found in the databse");
+//     break;
+//   }
+// }
+
+// if (!matchFound) {
+//   console.log("No match found in the database");
+// }
+
+
         res.send({
           data:text,
           status:"Approved"
@@ -90,6 +135,10 @@ app.post("/validateInvoice",asyncHandler(async(req,res)=>{
         status:"Disapproved"
         })
     })   
+// res.send({
+//             data:"text",
+//             status:"Approved"
+//             })
 }))
 
 app.get("/", (req, res) => {
