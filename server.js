@@ -66,7 +66,12 @@ app.get(
   })
 );
 
-
+app.post("/validateInvoice",(req,res)=>{
+  console.log(req.body.text);
+  res.send(200).json({
+    status:"Approved"
+    })
+})
 app.get("/", (req, res) => {
   console.log(__dirname);
   res.sendFile(__dirname + "/views/home.html");

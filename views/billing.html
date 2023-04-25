@@ -1,63 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/billing.css">
-    <script src="requestor.js"> </script>
+    <link rel="stylesheet" href="/billing.css" />
+    <script src="requestor.js"></script>
     <title>BILLING</title>
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#myNavbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      </div><a class="navbar-brand" href="#">INVOICE VALIDATOR</a>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="#">Billing</a></li>
-          <li><a href="/about">About us</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="background">
-    <img src="https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-18130.jpg?w=1380&t=st=1682416995~exp=1682417595~hmac=81342bceb9271b338d2367311119859b253ef129ceee4e233aa78f5dbecce8f9" alt="">
-</div>
-    <div class="formcontainer">
-      
-     
-      <form action>
-        <div class="form-group">
-          <label form="name"></label>
-            <h2> FORM DETAILS </h2>
-            <form action="#">
-              <label for="lang">Name</label>
-              <select name="languages" id="lang">
-                <option value="select">Select a Name</option>
-                <option value="javascript">Pencil</option>
-                <option value="php">Pen</option>
-                <option value="java">Shampoo</option>
-                <option value="golang">Detergent</option>
-                <option value="python">Eraser</option>
-                <option value="c#">Geometry Box</option>
-                <option value="C++">FaceWash</option>
-                <option value="erlang">Soap</option>
-              </select>
-              <label for="quantity">Quantity:</label>
-              <input type="number" id="quantity" name="quantity" min="1" max="5">
-              <input type="submit" value="Submit"/>
-        </form>
-               
+    <nav class="navbar navbar-inverse" style="background-color: #12192c">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            class="navbar-toggle"
+            type="button"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span><span class="icon-bar"></span
+            ><span class="icon-bar"></span>
+          </button>
         </div>
-        
+        <a class="navbar-brand" href="#">INVOICE VALIDATOR</a>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="#">Billing</a></li>
+            <li><a href="/about">About us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="background">
+      <img
+        src="https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-18130.jpg?w=1380&t=st=1682416995~exp=1682417595~hmac=81342bceb9271b338d2367311119859b253ef129ceee4e233aa78f5dbecce8f9"
+        alt=""
+      />
+    </div>
+    <div class="formcontainer">
+      <form id="bill-form">
+        <h2 id="heading">BILLING DETAILS</h2>
+        <div class="form-group">
+            <div class="row">
+            <label for="lang">Name</label>
+            <select name="languages" id="lang">
+              <option value="select">Select a Name</option>
+              <option value="javascript">Pencil</option>
+              <option value="php">Pen</option>
+              <option value="java">Shampoo</option>
+              <option value="golang">Detergent</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              max="5"
+              />
+            </div>
+          </div>
+          
+            <input type="submit" value="Submit" />
+      
       </form>
+      <div class="table">
+        <table>
+        <thead>
+        <tr>
+        <th>Helo head</th>
+        <th>helo head</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>helo data</td>
+        <td>helo data</td>
+        </tr>
+        <tr>
+          <td>helo data</td>
+          <td>helo data</td>
+          </tr>
+          <tr>
+            <td>helo data</td>
+            <td>helo data</td>
+            </tr>
+        </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

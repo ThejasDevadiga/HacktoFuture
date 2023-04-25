@@ -10,16 +10,18 @@ body {
   height: 50%;
   width: 100%;
   /* background-image: url('https://img.freepik.com/free-vector/illustration-data-analysis-graph_53876-18130.jpg?w=1380&t=st=1682416995~exp=1682417595~hmac=81342bceb9271b338d2367311119859b253ef129ceee4e233aa78f5dbecce8f9'); */
-  -webkit-filter: blur(8px);
-  filter: blur(8px);
+  -webkit-filter: blur(2px);
+    filter: blur(3px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
 }
 input[type="submit"] {
-  border: none;
-  background-color: rgb(188, 188, 188);
+  border-width: 3px;
+  background-color: #12192c;
+  border-color: #4158d0;
+  color: #fff;
   border-radius: 10px;
   height: 5rem;
   width: 10rem;
@@ -32,10 +34,10 @@ input[type="submit"] {
   flex-direction: row;
   height: 60%;
   width: 50%;
-  background-color: rgba(224, 224, 224, 0.934);
-  border-radius: 2%;
-  background-color: rgba(219, 219, 219, 0.4);
+  background-color: #12192c;
+  border-radius: 20px;
   position: absolute;
+  border: 3px solid #f1f1f1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -43,31 +45,34 @@ input[type="submit"] {
   text-align: center;
 }
 
+.result{
+color:rgb(205, 22, 22);
+font-weight: 600;
 
+}
 .formcontainer:hover {
   box-shadow: 1px 1px 5px rgb(74, 74, 74);
 }
 
-p {
-  font-weight: bold;
-  font-size: 20px;
-  font-style: italic;
-  text-align: center;
-  color: black;
-}
+
 
 input[type="file"] {
   height: 5rem;
   margin: none;
+  color: white;
   padding: 1rem;
+  border: 2px white;
+  margin-left: 10rem;
 }
 
 label h2 {
-  color: rgb(37, 69, 96);
-  font-weight: 900;
-  font-size: 20px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
   font-family: monospace;
-  font-style: italic;
+  text-transform: uppercase;
+  font-size: 23px;
+  letter-spacing: 6px;
+  opacity: 0.9;
 }
 #btn {
   border: none;

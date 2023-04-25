@@ -5,22 +5,22 @@
     height: 50%;
     width: 100%;
     /* background-image: url('https://img.freepik.com/free-vector/finance-financial-performance-concept-illustration_53876-43398.jpg?w=1380&t=st=1682421443~exp=1682422043~hmac=bbc13031926eb5accbf180d7343ff592c8ff59083334e7e044d2f6f5d387c715'); */
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
+    -webkit-filter: blur(2px);
+    filter: blur(3px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
    }
    
    .formcontainer{
+    
        display: flex;
        align-items: center;
-       height: 60%;
+       height: 85%;
        width: 50%;
-       background-color: rgba(224, 224, 224, 0.934);
-       border-radius: 2%;
-       background-color: rgba(219, 219, 219, 0.4); 
-       justify-content: center;
+       background-color: #12192c;
+       border-radius: 20px;
+       justify-content: space-around;
        flex-direction: column;
        border: 3px solid #f1f1f1;
        position: absolute;
@@ -36,12 +36,13 @@
        
        
    }
-p{
+p
+{
        font-weight: bold;
        font-size: 20px;
        font-style: italic;
        text-align: center;
-       color: black;
+       color: rgb(255, 255, 255);
 
 }
 
@@ -50,31 +51,25 @@ input[type="file"]{
     margin: none;
     padding: 1rem;
 }
-
- 
-
- label h2{
-    color: rgb(37, 69, 96);
+#heading{
+    color: rgb(255, 255, 255);
     font-weight:900;
-    font-size: 20px;
+    font-size: 30px;
+    letter-spacing: 6px;
     font-family:monospace;
-    font-style:italic;
-
-    
 }
-#btn{
+input[type="submit"]{
     
-    border:none;
+    border-width: 3px;
+    padding-left: 12px;
+    padding-right: 12px;
     border-radius: 20px;
-     
-    background-color: rgb(0, 131, 237);
+    border-color:#4158d0 ;
+    background-color: #12192c;
     color: white;
-    padding :4%;
+    
     font-size: 15px;
     font-weight: 400;
-    
-
-    
 }
 select {
     margin-bottom: 10px;
@@ -86,5 +81,21 @@ select {
     border: none;
     padding: 4px;
     border-radius: 9px;
-  }
+}
+#bill-form{
+width: 100%;
+}
 
+.form-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 30%;
+    width: 100%;
+}
+
+.table{
+    height: 60%;
+}
+.row{
+width: 40%;}
