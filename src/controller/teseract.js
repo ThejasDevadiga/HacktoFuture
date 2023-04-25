@@ -148,3 +148,25 @@ if (!matchFound) {
 console.log("No match found.");
 }
 
+//let jsonFile = '{"employees": [{"name": "John", "age": 30}, {"name": "Jane", "age": 25}, {"name": "Bob", "age": 40}]}';
+
+// String to match
+text
+
+// Parse the JSON file into a JavaScript object
+let jsonObject = JSON.parse(res);
+
+// Loop through the employees in the object and find the element
+let matchFound1 = false;
+for (let data of jsonObject.r) {
+  if (employee.name === searchString) {
+    matchFound = true;
+    console.log("Match found. Employee age is " + employee.age + ".");
+    break;
+  }
+}
+
+if (!matchFound) {
+  console.log("No match found.");
+}
+

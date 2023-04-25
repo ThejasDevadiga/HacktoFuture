@@ -2,10 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Products = require("./src/models/products");
-const Invoices  = require('./src/models/invoiceList')
+const Invoices = require("./src/models/invoiceList");
 // const CreateInvoice = require('./src/controller/createInvoice')
 const asyncHandler = require("express-async-handler");
-const Tesseract = require('tesseract.js')
+const Tesseract = require("tesseract.js");
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
@@ -15,7 +15,7 @@ const connectDB = async () => {
         useNewUrlParser: true,
       }
     );
-    
+
     console.log(`Connected to Database : ${conn.connection.host}`);
   } catch (err) {
     console.error(`Error: ${err.message}`);
@@ -40,10 +40,8 @@ app.use(express.json());
 
 app.use(cors());
 
-
 console.log(__dirname);
 app.use(express.static("public"));
-
 
 app.post(
   "/products",
@@ -58,46 +56,133 @@ app.get(
   "/invoices",
   asyncHandler(async (req, res) => {
     const result = await Invoices.find({}, {}).populate({
-    model:Products,
-    path:"productList.productID"
-  });
-  
+      model: Products,
+      path: "productList.productID",
+    });
+
     res.status(200).json({
       data: result,
     });
   })
 );
 
-app.post("/validateInvoice/",asyncHandler(async(req,res)=>{
+app.get(
+  "/validateInvoice/:id/:name",
+  asyncHandler(async (req, res) => {
+    console.log(req.params.id);
+    const url =
+      "https://res.cloudinary.com/acahscollege/image/upload/" +
+      req.params.id +
+      "/" +
+      req.params.name;
+    console.log(url);
+    Tesseract.recognize(url, "eng", { logger: (m) => console.log(m) })
+      .then(async ({ data: { text } }) => {
+        const invoiceList = await Invoices.find({}, {}).populate({
+          model: Products,
+          path: "productList.productID",
+        });
 
-  const url = req.body.url;
-  console.log(url);
- Tesseract.recognize(
-    url,
-    'eng',
-    { logger: m => console.log(m) } 
-    ).then(async({ data: { text } }) => {  
-      // const result = await Invoices.find({}, {}).populate({
-      //   model:Products,
-      //   path:"productList.productID"
-      // });
-      console.log(text);
-        res.send({
-          data:text,
-          status:"Approved"
-          })
-    })
-    .catch(err=>{
-      res.send({
-        data:err,
-        status:"Disapproved"
-        })
-    })   
-// res.send({
-//             data:"text",
-//             status:"Approved"
-//             })
-}))
+        console.log(text);
+
+        let start_word = "Invoice No. ";
+        let start_index = text.indexOf(start_word);
+
+        let end_word = "\r";
+        let end_index = text.indexOf(end_word);
+
+        let substring = text.substring(
+          start_index + start_word.length,
+          end_index
+        );
+        console.log(substring);
+        let words = substring.split(" ");
+
+        console.log(words);
+        //words="Invoice"+words;
+        console.log(words);
+
+        let matchFound = false;
+        for (let invoice of invoiceList) {
+          if (invoice.invoiceID === words[0]) {
+            matchFound = true;
+            console.log("Invoice Match found !!");
+            //console.log(invoice);
+            break;
+          }
+        }
+        if (!matchFound) {
+          console.log("Invoice not found !!");
+        }
+        let count = 0;
+        let i = 1;
+        let matchFound1 = false;
+        for (let invoice of invoiceList) {
+          if (text.indexOf(invoice.customerName) !== -1) {
+            if (i === 1) {
+              console.log("Name Matched");
+              i++;
+            }
+            count++;
+          }
+          let j = 1;
+          if (text.indexOf(invoice.customerAddress) !== -1) {
+            if (i === 1) {
+              console.log("Address Matched");
+              j++;
+            }
+            count++;
+          }
+          let k = 1;
+          if (text.indexOf(invoice.Phone) !== -1) {
+            if (k === 1) {
+              console.log("Phone numnber Matched");
+              k++;
+            }
+            count++;
+          }
+          let z = 1;
+          if (text.indexOf(invoice.Date) !== -1) {
+            if (z === 1) {
+              console.log("Date Matched");
+              z++;
+            }
+            count++;
+          }
+          let n = 1;
+          if (text.indexOf(invoice.Total) !== -1) {
+            if (n === 1) {
+              console.log("Total Amount Matched");
+              n++;
+            }
+            count++;
+          }
+        }
+        let avg = 0;
+        avg = (count / 5) * 100;
+        console.log(count);
+        console.log(avg + "% Match Found");
+
+        res.status(200).json({
+          data: text,
+          status: "Approved",
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          data: err,
+          status: "Disapproved",
+        });
+      });
+  })
+);
+app.post("/post", async (req, res) => {
+  const data = req.body.url;
+  res.send({
+    data: data,
+    status: "Approved",
+  });
+});
 
 app.get("/", (req, res) => {
   console.log(__dirname);

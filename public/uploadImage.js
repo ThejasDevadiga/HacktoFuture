@@ -32,27 +32,47 @@ function displayImage() {
       )
         .then((res) => res.json())
         .then(async(data) => {
-          console.log(data.url.toString());
-          // result.innerText = "<p>The selected file uploaded to Cloudinary!</p>";
-          // result.style.color = "green";
-          // https://api.ocr.space/parse/imageurl?apikey=K87960241388957&url=http://res.cloudinary.com/acahscollege/image/upload/v1682439427/mwlyrwhkl6aiyvawcr2h.jpg
-          var result = await requestor(
-            "POST",data.url.toString(),
-            "http://localhost:5000/validateInvoice"
+        console.log(data);
+          console.log(data.secure_url.toString());
+          var url = data.secure_url.toString()
+          const id = url.replace("https://res.cloudinary.com/acahscollege/image/upload/","")
+            var result = await requestor(
+            "get",null,
+            "http://localhost:5000/validateInvoice/"+id
           );
+          
+          
+          if(result){
           data = JSON.parse(result);
           console.log(data);
+          if(data.status=="Approved"){
+          const resElement = document.getElementById("result");
+          resElement.innerHTML = "<p>Approve this document</p>"
+          resElement.style.color="green"
+          }
+          else{
+            const resElement = document.getElementById("result");
+            resElement.innerHTML = "<p>Dont approve this document</p>"
+            resElement.style.color="red"
+            }
+
+          }
+          else{
+            throw new  Error("uploadImage result is Null")
+          }
         })
         .catch((err) => {
           console.log(err);
-          
         });
+
     } else {
       result.innerText = "The selected file is not an image.";
     }
+
     if (file) {
       reader.readAsDataURL(file);
     }
+    
   } catch (err) {
     console.log(err);
   }

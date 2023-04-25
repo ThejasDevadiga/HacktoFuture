@@ -1,7 +1,7 @@
 
 async function requestor(type, raw, url){
     var myHeaders = new Headers();
-   
+    
      myHeaders.append("Access-Control-Request-Headers", "*");
      myHeaders.append("Content-Type", "application/json");
       var requestOptions = {
@@ -10,17 +10,14 @@ async function requestor(type, raw, url){
        headers: myHeaders,
        redirect: 'follow'
      };
-     if(raw){
+    if(raw){
       requestOptions.body = raw
     }
     
-     console.log(requestOptions);
-     
+    console.log(requestOptions);
+  
     return  await fetch(url, requestOptions)
-    // .then(res=>console.log(res.text()))
-    //  .then(response =>  response.text())
-       .then(result => {return result} )
-       .catch(error =>{ console.log('error', error); return null});  
-   }
-
-   
+   .then(response => response.text())
+     .then(result => {return result} )
+     .catch(error =>{ console.log('error', error); return null});
+  }
