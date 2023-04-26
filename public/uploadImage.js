@@ -47,12 +47,12 @@ function displayImage() {
           console.log(data);
           if(data.status=="Approved"){
           const resElement = document.getElementById("result");
-          resElement.innerHTML = "<p>Approve this document</p>"
+          resElement.innerHTML = "<p> Document matching "+data.Output+"% </p>"
           resElement.style.color="green"
           }
           else{
             const resElement = document.getElementById("result");
-            resElement.innerHTML = "<p>Dont approve this document</p>"
+            resElement.innerHTML = "<p>Documents is not matching </p>"
             resElement.style.color="red"
             }
 

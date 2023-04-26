@@ -79,110 +79,61 @@ app.get(
     console.log(url);
     Tesseract.recognize(url, "eng", { logger: (m) => console.log(m) })
       .then(async ({ data: { text } }) => {
-        const invoiceList = await Invoices.find({}, {}).populate({
-          model: Products,
-          path: "productList.productID",
-        });
-        console.log(text);
-
-  
-  let start_word = "Invoice ID: ";
-  let start_index = text.indexOf(start_word);
-  
-  let end_word = "Address";
-  let end_index = text.indexOf(end_word);
-  
-  let substring = text.substring(
-    start_index + start_word.length,
-    end_index
-  );
-  
-  console.log(substring);
-  let words = substring.split(" ");
-  const  Invoice = {}
-  let matchFound = false;
-  for (let invoice of invoiceList) {
-    if (invoice.invoiceID === words[0]) {
-      matchFound = true;
-      console.log("Invoice Match found !!");
-      //console.log(invoice);
-      Invoice = invoice
-      break;
-    }
-  }
-  
-  if (!matchFound) {
-    Output.status="Invoice not found!"
-    console.log("Invoice not found!");
-    
-  }
-  
-  if (matchFound) {
-    let count = 1;
-    let i = 1;
-    let matchFound1 = false;
-      if (text.indexOf(Invoice.customerName) !== -1) {
-        if (i === 1) {
-          Output.Name="Name Matched"
-          console.log("Name");
-          i++;
+        
+        // const invoiceList = await Invoices.find({}, {invoiceID:1,customerName:1,customerAddress:1,Total:1,Date:1}).populate({
+        //   model: Products,
+        //   path: "productList.productID",
+        // });
+        const invoiceList = [
+          {
+            "invoiceID": "INV789632455",
+            "customerName": "Gorge",
+            "customerAddress": "Up Hills Town",
+            "Phone": 96962223,
+            "Date": "4/25/2023",
+            "Total":2000
+          },
+          {
+            "invoiceID": "12345",
+            "customerName": "Gorge",
+            "customerAddress": "Up Hills Town",
+            "Phone": 96962223,
+            "Date": "2023-04-25T07:35:21.000Z",
+            "Total":500,
+          }
+        ]
+        function matchInvoices(text, invoices) {
+          const matchedInvoices = invoices.map((invoice) => {
+            const numMatchingProps = Object.keys(invoice).filter((prop) => {
+              const propValue = invoice[prop];
+              if (typeof propValue === "string") {
+                return text.includes(propValue);
+              } else if (typeof propValue === "number") {
+                return text.includes(propValue.toString());
+              }
+              return false;
+            }).length;
+        
+            const percentMatchingProps = numMatchingProps / Object.keys(invoice).length * 100;
+        
+            return {
+              ...invoice,
+              percentMatchingProps,
+            };
+          });
+        
+          return matchedInvoices[0];
         }
-        count++;
-      }
-      let j = 1;
-      if (text.indexOf(Invoice.customerAddress) !== -1) {
-        if (i === 1) {
-          Output.address="Address Matched"
-          console.log("Address");
-          j++;
-        }
-        count++;
-      }
-      let k = 1;
-      if (text.indexOf(Invoice.Phone) !== -1) {
-        if (k <= 1) {
-          Output.phone="Phone number Matched";
-          console.log("Phone");
-          k++;
-        }
-        count++;
-      }
-      let z = 1;
-      if (text.indexOf(Invoice.Date) !== -1) {
-        if (z === 1) {
-          Output.date="Date Matched",
-          console.log("Date");
-          z++;
-        }
-        count++;
-      }
-      let n = 1;
-      if (text.indexOf(Invoice.Total) !== -1) {
-        if (n === 1) {
-          Output.Total="Total Amount Matched"
-          
-          console.log("total");
-          n++;
-        }
-        count++;
-      }
-      let avg = 0;
-      avg = (count / 6) * 100;
-      const Status = document.getElementById("status")
-      Status.innerHTML = avg + "% Match Found";
-      Status.style.color= "Green";
-      Status.style.fontSize="15px"
-      // Output.address=avg + "% Match Found";
-    }
-
+      
+       const Data =  matchInvoices(text,invoiceList)
         res.status(200).json({
           data: text,
-          Output:Output,
+          Output:Data.percentMatchingProps,
           status: "Approved",
         });
       })
       .catch((err) => {
-        res.status(200).json({
+        res.status(500).json({
           data: err,
           status: "Disapproved",
         });
