@@ -5,7 +5,7 @@ const res = [
       "customerName": "Gorge",
       "customerAddress": "Up Hills Town",
       "Phone": 96962223,
-      "Date": "2023-04-25T07:35:21.000Z",
+      "Date": "4/25/2023",
       "__v": 0,
       "createdAt": "2023-04-25T07:35:21.468Z",
       "updatedAt": "2023-04-25T07:35:21.468Z",
@@ -107,97 +107,5 @@ const res = [
     }
   ]
   
+  const text = "Customer Name: Gorge Invoice ID: INV789632455 Address: Up Hills Town Date: 4/25/2023 Phone: 96962223 Product List 1. Pencil 3x20 $60 2. Sanitizer 3x100 $500 3. Book 3x50 $150 Total: $2000"
   
-const text = "Date : 12/07/2023 Invoice No. 12345 Fintech Solutions & Co. Pvt. Ltd. INVOICE TO :HARDIK PRABHU P : +918496845871 E : hardikprabhul23@gmail.com A : Alvas Institute of Engg & Tech PRODUCTS QTY PRICE TOTAL Sub-total : Rs1,735 Payment Method : Tox : Rs55 Bank Name :Canara Bank Total : Rs1,680 Bank Account : 1280969458 Authorised Signature"
-
-
-
-let start_word = "Invoice No. ";
-let start_index = text.indexOf(start_word);
-
-let end_word = "\r";
-let end_index = text.indexOf(end_word);
-
-
-let substring = text.substring(start_index + start_word.length, end_index);
-console.log(substring);
- let words = substring.split(" ");
-
-console.log(words);
-//words="Invoice"+words;
-console.log(words);
-
-
-let matchFound = false;
-for (let invoice of res) {
-if (invoice.invoiceID === words[0]) {
-matchFound = true;
-console.log("Invoice Match found !!");
-//console.log(invoice);
-break;
-
-}
-}
-
-if (!matchFound) {
-console.log("Invoice not found !!");
-}
-
-
-let count=0;
-let i=1;
-let matchFound1 = false;
-for (let invoice of res) {
-if (text.indexOf(invoice.customerName) !==-1 ) {
-    if(i===1)
-    {
-    console.log("Name Matched");
-    i++;
-    }
-    count++;
-}
-let j=1;
-if (text.indexOf(invoice.customerAddress) !==-1 ) {
-    if(i===1)
-    {
-    console.log("Address Matched");
-    j++;
-    }
-    count++;
-}
-let k=1;
-if (text.indexOf(invoice.Phone) !==-1 ){
-    if(k===1)
-    {
-    console.log("Phone numnber Matched");
-    k++;
-    }
-          count++;
-}
-let z=1;
-if (text.indexOf(invoice.Date) !==-1 ) {
-    if(z===1)
-    {
-    console.log("Date Matched");
-    z++;
-    };
-     count++;
-}
-let n=1;
-if (text.indexOf(invoice.Total) !==-1 ) {
-    if(n===1)
-    {
-    console.log("Total Amount Matched");
-    n++;
-    };
-    count++;
-}
-}
-let avg=0;
-avg=(count/5)*100;
-console.log(count);
-console.log(avg+"% Match Found");
-
-
-
-

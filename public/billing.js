@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
         //     products.append({productID,quantity})
         //     sessionStorage.setItem("products",products);
         //   })
+        
         const submitter = document.querySelector('#makepdf');
         submitter.addEventListener("click",()=>{
             const data ={
@@ -47,7 +48,7 @@ window.addEventListener("load", () => {
                       "updatedAt": "2023-04-25T06:29:38.885Z",
                       "price": 100
                     },
-                    "quantity": 2
+                    "quantity": 4
                   },
                   {
                     "_id": "644863a959cb9efd2918294a",
@@ -65,21 +66,17 @@ window.addEventListener("load", () => {
                   }
                 ]
               }
-             
-            
-            
-          
               const doc = new jsPDF();
 
               // set font style
-              doc.setFontSize(22);
+              doc.setFontSize(25);
               doc.setFontType("bold");
               
               // add header
               doc.text("INVOICE", 80, 20);
               
               // set font style
-              doc.setFontSize(10);
+              doc.setFontSize(12);
               doc.setFontType("normal");
               
               // add customer details
@@ -104,8 +101,11 @@ window.addEventListener("load", () => {
               let y = 90;
               data.productList.forEach((product, index) => {
                 doc.text((index + 1) + ". " + product.productID.productName, 20, y);
-                doc.text(product.quantity + " x" + product.productID.price, 100, y);
+                doc.text(product.quantity + " x $" + product.productID.price, 100, y);
                 doc.text("$" + (product.quantity * product.productID.price), 150, y);
+                if (index !== data.productList.length - 1) { 
+                  doc.line(20, y + 5, 190, y + 5);
+                }
                 y += 10;
               });
               
@@ -127,5 +127,5 @@ window.addEventListener("load", () => {
                 });
                 return total;
               }
-            }    )          
+            })                      
 })

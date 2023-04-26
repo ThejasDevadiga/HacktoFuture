@@ -70,6 +70,7 @@ app.get(
   "/validateInvoice/:id/:name",
   asyncHandler(async (req, res) => {
     console.log(req.params.id);
+    const  Output = {};
     const url =
       "https://res.cloudinary.com/acahscollege/image/upload/" +
       req.params.id +
@@ -82,101 +83,112 @@ app.get(
           model: Products,
           path: "productList.productID",
         });
-
         console.log(text);
 
-        let start_word = "Invoice No. ";
-        let start_index = text.indexOf(start_word);
-
-        let end_word = "\r";
-        let end_index = text.indexOf(end_word);
-
-        let substring = text.substring(
-          start_index + start_word.length,
-          end_index
-        );
-        console.log(substring);
-        let words = substring.split(" ");
-
-        console.log(words);
-        //words="Invoice"+words;
-        console.log(words);
-
-        let matchFound = false;
-        for (let invoice of invoiceList) {
-          if (invoice.invoiceID === words[0]) {
-            matchFound = true;
-            console.log("Invoice Match found !!");
-            //console.log(invoice);
-            break;
-          }
+  
+  let start_word = "Invoice ID: ";
+  let start_index = text.indexOf(start_word);
+  
+  let end_word = "Address";
+  let end_index = text.indexOf(end_word);
+  
+  let substring = text.substring(
+    start_index + start_word.length,
+    end_index
+  );
+  
+  console.log(substring);
+  let words = substring.split(" ");
+  const  Invoice = {}
+  let matchFound = false;
+  for (let invoice of invoiceList) {
+    if (invoice.invoiceID === words[0]) {
+      matchFound = true;
+      console.log("Invoice Match found !!");
+      //console.log(invoice);
+      Invoice = invoice
+      break;
+    }
+  }
+  
+  if (!matchFound) {
+    Output.status="Invoice not found!"
+    console.log("Invoice not found!");
+    
+  }
+  
+  if (matchFound) {
+    let count = 1;
+    let i = 1;
+    let matchFound1 = false;
+      if (text.indexOf(Invoice.customerName) !== -1) {
+        if (i === 1) {
+          Output.Name="Name Matched"
+          console.log("Name");
+          i++;
         }
-        if (!matchFound) {
-          console.log("Invoice not found !!");
+        count++;
+      }
+      let j = 1;
+      if (text.indexOf(Invoice.customerAddress) !== -1) {
+        if (i === 1) {
+          Output.address="Address Matched"
+          console.log("Address");
+          j++;
         }
-        let count = 0;
-        let i = 1;
-        let matchFound1 = false;
-        for (let invoice of invoiceList) {
-          if (text.indexOf(invoice.customerName) !== -1) {
-            if (i === 1) {
-              console.log("Name Matched");
-              i++;
-            }
-            count++;
-          }
-          let j = 1;
-          if (text.indexOf(invoice.customerAddress) !== -1) {
-            if (i === 1) {
-              console.log("Address Matched");
-              j++;
-            }
-            count++;
-          }
-          let k = 1;
-          if (text.indexOf(invoice.Phone) !== -1) {
-            if (k === 1) {
-              console.log("Phone numnber Matched");
-              k++;
-            }
-            count++;
-          }
-          let z = 1;
-          if (text.indexOf(invoice.Date) !== -1) {
-            if (z === 1) {
-              console.log("Date Matched");
-              z++;
-            }
-            count++;
-          }
-          let n = 1;
-          if (text.indexOf(invoice.Total) !== -1) {
-            if (n === 1) {
-              console.log("Total Amount Matched");
-              n++;
-            }
-            count++;
-          }
+        count++;
+      }
+      let k = 1;
+      if (text.indexOf(Invoice.Phone) !== -1) {
+        if (k <= 1) {
+          Output.phone="Phone number Matched";
+          console.log("Phone");
+          k++;
         }
-        let avg = 0;
-        avg = (count / 5) * 100;
-        console.log(count);
-        console.log(avg + "% Match Found");
+        count++;
+      }
+      let z = 1;
+      if (text.indexOf(Invoice.Date) !== -1) {
+        if (z === 1) {
+          Output.date="Date Matched",
+          console.log("Date");
+          z++;
+        }
+        count++;
+      }
+      let n = 1;
+      if (text.indexOf(Invoice.Total) !== -1) {
+        if (n === 1) {
+          Output.Total="Total Amount Matched"
+          
+          console.log("total");
+          n++;
+        }
+        count++;
+      }
+      let avg = 0;
+      avg = (count / 6) * 100;
+      const Status = document.getElementById("status")
+      Status.innerHTML = avg + "% Match Found";
+      Status.style.color= "Green";
+      Status.style.fontSize="15px"
+      // Output.address=avg + "% Match Found";
+    }
 
         res.status(200).json({
           data: text,
+          Output:Output,
           status: "Approved",
         });
       })
       .catch((err) => {
-        res.status(500).json({
+        res.status(200).json({
           data: err,
           status: "Disapproved",
         });
       });
   })
 );
-
 
 app.get("/", (req, res) => {
   console.log(__dirname);
